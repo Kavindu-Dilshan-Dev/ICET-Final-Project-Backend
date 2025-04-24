@@ -1,5 +1,6 @@
 package com.kavindu.message;
 
+import com.kavindu.file.FileUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +14,7 @@ public class MessageMapper {
                 .type(message.getType())
                 .state(message.getState())
                 .createdAt(message.getCreatedDate())
-                // to do read media file
+                .media(FileUtils.readFileFromLocation(message.getMediaFilePath()))
                 .build();
     }
 }
