@@ -3,6 +3,7 @@ package com.kavindu.security;
 
 import org.hibernate.annotations.ConcreteProxy;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,7 +18,7 @@ import java.util.Collections;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@ConcreteProxy
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
@@ -26,7 +27,8 @@ public class SecurityConfig {
         http.cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers(
+                        req.requestMatchers("/auth/**",
+                                "/v2/api-docs",
                                 "/v3/api-docs",
                                 "/v3/api-docs/**",
                                 "/swagger-resources",
